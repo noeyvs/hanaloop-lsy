@@ -116,4 +116,19 @@
 
 ## 6. (선택) ERD 또는 스키마 다이어그램, 타 시스템 비교 등
 
-*(자유롭게 작성해 주세요.)*
+### 📊 데이터베이스 스키마 다이어그램
+
+[Hanaloop 배출계수 ERD - Prisma Schema](https://www.figma.com/board/8vTSkKCnTuS9G9YAO7tHuM?utm_source=claude_code&utm_content=edit_in_figjam)
+
+#### 주요 엔티티 및 관계
+
+- **EmissionFactorMaster**: 활동 유형별 배출계수 기본 정보 관리
+- **EmissionFactorVersion**: 배출계수의 버전 이력 추적 (validFrom, validTo)
+- **ActivityData**: 실제 활동 데이터 기록 및 배출계수 버전 참조
+- **Product**: 제품 정보 관리
+
+#### 설계 특징
+
+- **버전 관리**: EmissionFactorVersion을 통해 배출계수의 시간대별 변화 추적
+- **유연한 참조**: ActivityData에서 특정 시점의 EmissionFactorVersion을 참조하여 정확한 PCF 계산
+- **인덱싱**: masterId와 validFrom에 복합 인덱스로 빠른 조회 성능 확보
