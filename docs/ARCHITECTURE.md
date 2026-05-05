@@ -1,7 +1,6 @@
 # 🏗️ System Architecture
 
 > PCF(Product Carbon Footprint) 분석 대시보드의 시스템 아키텍처 및 설계 명세  
-> 참고: [2026-05-05-dashboard-design.md](superpowers/specs/2026-05-05-dashboard-design.md)
 
 ---
 
@@ -32,6 +31,7 @@
 ## 2. 기술 스택
 
 ### Frontend
+
 - **Framework**: Next.js 14 (App Router)
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
@@ -40,11 +40,13 @@
 - **Icons**: Lucide React
 
 ### Backend & API
+
 - **Runtime**: Node.js
 - **API**: Next.js Route Handlers
 - **File Processing**: ExcelJS
 
 ### Database
+
 - **DBMS**: PostgreSQL 14+
 - **ORM**: Prisma
 - **Migrations**: Prisma Migrate
@@ -104,15 +106,23 @@
 ### 4.1 핵심 엔티티
 
 **Products** (제품)
+
 - id, name, description, created_at
 
-**EmissionFactors** (배출계수)
-- id, activityType, item, factor, unit, version, validFrom, validTo, created_at, updated_at
+**EmissionFactorMaster** (배출계수 마스터)
+
+- id, activityType, itemName, unit, description, created_at, updated_at
+
+**EmissionFactorVersion** (배출계수 버전)
+
+- id, masterId, factor, versionName, validFrom, validTo, source, created_at, updated_at
 
 **ActivityData** (활동 데이터)
-- id, date, activityType, description, quantity, unit, calculatedPcf, emissionFactorId, created_at, updated_at
+
+- id, date, activityType, description, quantity, unit, calculatedPcf, emissionFactorVersionId, created_at, updated_at
 
 **ImportLogs** (임포트 이력)
+
 - id, file_name, row_count, status(success|failed), error_message, imported_at
 
 ### 4.2 관계
@@ -138,6 +148,7 @@ PCF = (Raw Materials × EF_RM)
 ```
 
 ### Scope 분류
+
 - **Scope 1**: 직접 배출 (생산 과정)
 - **Scope 2**: 간접 배출 (구매 전기)
 - **Scope 3**: 기타 간접 배출 (운송, 폐기 등)
@@ -147,16 +158,19 @@ PCF = (Raw Materials × EF_RM)
 ## 6. API 엔드포인트 설계
 
 ### Dashboard API
+
 - `GET /api/dashboard/summary` - KPI 지표 조회
 - `GET /api/dashboard/charts` - 차트 데이터 조회
 - `GET /api/dashboard/filter-options` - 필터 옵션 조회
 
 ### Import API
+
 - `POST /api/import/validate` - 파일 검증
 - `POST /api/import/preview` - 임포트 미리보기
 - `POST /api/import/process` - 데이터 임포트
 
 ### Coefficient API
+
 - `GET /api/coefficients` - 배출계수 목록
 - `GET /api/coefficients/history` - 버전 이력
 - `POST /api/coefficients` - 배출계수 추가

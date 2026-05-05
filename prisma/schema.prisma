@@ -11,63 +11,75 @@ datasource db {
 }
 
 /**
- * 배출계수 테이블 (EmissionFactor)
- * - 배출계수의 버전 이력을 추적하도록 설계되었습니다.
- * - 특정 활동 유형(activityType)에 대해 유효 기간(validFrom ~ validTo)과 버전을 가집니다.
+ * 배출계수 마스터 (EmissionFactorMaster)
+ * - 활동 유형별 기본 정보를 관리합니다.
  */
-model EmissionFactor {
+model EmissionFactorMaster {
   id            String    @id @default(cuid())
-  activityType  String    // 활동 유형 (예: 전기, 플라스틱1, 경유 등)
-  item          String    // 항목 명칭 (계산 시 '항목' 필드에 해당)
-  factor        Float     // 배출 계수 값 (계산 시 '계수' 필드에 해당)
-  unit          String    // 단위 (kWh, kg, L 등)
-  version       String    // 버전 정보 (예: v1.0, 2024_Q1)
+  activityType  String    @unique // 활동 유형 (예: 전기, 플라스틱1, 경유 등)
+  itemName      String    // 항목 명칭
+  unit          String    // 기본 단위 (kWh, kg, L 등)
+  description   String?   // 설명
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  versions      EmissionFactorVersion[]
+}
+
+/**
+ * 배출계수 버전 (EmissionFactorVersion)
+ * - 실제 배출계수 값과 버전 이력을 관리합니다.
+ */
+model EmissionFactorVersion {
+  id            String    @id @default(cuid())
+  masterId      String
+  master        EmissionFactorMaster @relation(fields: [masterId], references: [id])
+  
+  factor        Float     // 배출 계수 값
+  versionName   String    // 버전 정보 (예: v1.0, 2024_Q1)
   validFrom     DateTime  @default(now()) // 적용 시작일
   validTo       DateTime?                 // 적용 종료일 (null이면 현재 최신 버전)
   source        String?   // 데이터 출처
+  
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
   activities    ActivityData[]
 
-  @@index([activityType, version])
+  @@index([masterId, validFrom])
 }
 
 /**
  * 활동 데이터 테이블 (ActivityData)
- * - Excel 임포트 데이터 및 수동 입력 데이터를 저장합니다.
- * - 계산 시점의 배출계수(EmissionFactor)를 연결하여 이력을 보존합니다.
+ * - 특정 시점의 배출계수 버전을 참조합니다.
  */
 model ActivityData {
-  id                String   @id @default(cuid())
-  date              DateTime // 일자
-  activityType      String   // 활동 유형
-  description       String?  // 설명
-  quantity          Float    // 량
-  unit              String   // 단위
+  id                    String   @id @default(cuid())
+  date                  DateTime // 일자
+  activityType          String   // 활동 유형
+  description           String?  // 설명
+  quantity              Float    // 량
+  unit                  String   // 단위
   
-  // 계산 결과 캐싱
-  calculatedPcf     Float?   // 계산된 배출량 (quantity * emissionFactor.factor)
+  calculatedPcf         Float?   // 계산된 배출량 (quantity * version.factor)
   
-  // 관계: 활동 데이터는 특정 버전의 배출계수를 참조합니다.
-  emissionFactorId  String?
-  emissionFactor    EmissionFactor? @relation(fields: [emissionFactorId], references: [id])
+  // 관계: 활동 데이터는 특정 '버전'의 배출계수를 참조합니다.
+  emissionFactorVersionId String?
+  emissionFactorVersion   EmissionFactorVersion? @relation(fields: [emissionFactorVersionId], references: [id])
 
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
 
   @@index([date])
-  @@index([activityType])
 }
 
 /**
  * 제품 테이블 (Product)
- * - PCF(제품 탄소 발자국) 관리를 위한 상위 그룹 엔티티입니다.
  */
 model Product {
   id          String   @id @default(cuid())
   name        String   // 제품명
-  code        String?  @unique // 제품 코드
+  code        String?  @unique
   description String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
