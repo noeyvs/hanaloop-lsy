@@ -46,3 +46,6 @@ next-env.d.ts
 .antigravity/
 .claude/
 
+# personal notes (not to be committed)
+qna.md
+
