@@ -85,13 +85,10 @@
 
 ## 1. 프로젝트 실행 방법
 
-*(5단계 이내로 로컬 실행 방법을 명확하게 작성해 주세요. `yarn start`로 오류 없이 실행되어야 합니다.)*
-
-1.
-2.
-3.
-4.
-5.
+1. `.env` 파일의 `DATABASE_URL`을 로컬 환경에 맞게 수정합니다.
+2. `docker-compose up -d --build` 명령어로 DB와 앱 컨테이너를 실행합니다.
+3. `docker-compose exec app npx prisma migrate dev --name init`으로 DB 스키마를 동기화합니다.
+4. 브라우저에서 `http://localhost:3000`에 접속합니다.
 
 ## 2. UI 실행 화면 (스크린샷 및 비디오)
 
