@@ -1,0 +1,86 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/**
+ * 배출계수 마스터 (EmissionFactorMaster)
+ * - 활동 유형별 기본 정보를 관리합니다.
+ */
+model EmissionFactorMaster {
+  id            String    @id @default(cuid())
+  activityType  String    @unique // 활동 유형 (예: 전기, 플라스틱1, 경유 등)
+  itemName      String    // 항목 명칭
+  unit          String    // 기본 단위 (kWh, kg, L 등)
+  description   String?   // 설명
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  versions      EmissionFactorVersion[]
+}
+
+/**
+ * 배출계수 버전 (EmissionFactorVersion)
+ * - 실제 배출계수 값과 버전 이력을 관리합니다.
+ */
+model EmissionFactorVersion {
+  id            String    @id @default(cuid())
+  masterId      String
+  master        EmissionFactorMaster @relation(fields: [masterId], references: [id])
+  
+  factor        Float     // 배출 계수 값
+  versionName   String    // 버전 정보 (예: v1.0, 2024_Q1)
+  validFrom     DateTime  @default(now()) // 적용 시작일
+  validTo       DateTime?                 // 적용 종료일 (null이면 현재 최신 버전)
+  source        String?   // 데이터 출처
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  activities    ActivityData[]
+
+  @@index([masterId, validFrom])
+}
+
+/**
+ * 활동 데이터 테이블 (ActivityData)
+ * - 특정 시점의 배출계수 버전을 참조합니다.
+ */
+model ActivityData {
+  id                    String   @id @default(cuid())
+  date                  DateTime // 일자
+  activityType          String   // 활동 유형
+  description           String?  // 설명
+  quantity              Float    // 량
+  unit                  String   // 단위
+  
+  calculatedPcf         Float?   // 계산된 배출량 (quantity * version.factor)
+  
+  // 관계: 활동 데이터는 특정 '버전'의 배출계수를 참조합니다.
+  emissionFactorVersionId String?
+  emissionFactorVersion   EmissionFactorVersion? @relation(fields: [emissionFactorVersionId], references: [id])
+
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  @@index([date])
+}
+
+/**
+ * 제품 테이블 (Product)
+ */
+model Product {
+  id          String   @id @default(cuid())
+  name        String   // 제품명
+  code        String?  @unique
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
