@@ -1,211 +1,36 @@
-# 🌍 하나루프(Hanaloop) 탄소 관리 플랫폼 — 개발자 채용 과제
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## 1. 과제 배경 및 맥락
-- **회사 소개**: 하나루프는 탄소 배출량을 측정·관리·감축하는 SaaS 플랫폼을 개발합니다. 제조사, 물류사 등 기업 고객이 원소재·전기·운송 데이터를 입력하면 제품별 탄소 발자국(PCF)을 자동 계산합니다.
-- **과제 목적**: 탄소 도메인을 빠르게 이해하고, 실제 동작하는 시스템을 UI 설계·구현·설명할 수 있는 개발자를 찾습니다. 
-  - *참고*: AI 도구를 활용하는 것은 환영하나, 생성된 코드를 제대로 이해하고 문맥에 맞지 않은 부분을 판단할 수 있어야 합니다.
+## Getting Started
 
-## 2. 과제 산출물 및 요구사항
-- **목표**: 제공된 **"과제용 데이터"**(`readme.xlsx` 참고)를 활용하여 PCF 전과정 데이터를 시각화하는 **인터랙티브한 대시보드**를 구현하세요.
-- **대상 사용자**: 실무자 및 경영자
-- **개발 환경**: `Typescript`, `Next.js` (Optional: `PostgreSQL`)
+First, run the development server:
 
-### 📌 시스템 설계 추가 요구사항
-1. **배출계수 관리**: 배출계수는 DB에 별도 테이블로 관리하고 버전 이력을 추적하도록 설계하세요.
-2. **데이터 임포트 (보너스 가점)**: 제공된 Excel 파일을 별도 가공 없이 PostgreSQL에 직접 임포트할 수 있는 인터페이스를 구현한 경우, 추가 가점을 부여합니다.
-
-### 📌 AI 사용 정책
-- 모든 AI 도구 사용을 허용합니다.
-- 단, 발표 시 **"AI로 무엇을 했고, 어떤 Prompt를 사용하였고, 왜 그런 결정을 했는지"** 반드시 구분하여 설명해야 합니다.
-- **README 파일에 AI 도구 사용 내역을 필수로 기록**해 주세요.
-
-## 3. 제출 및 평가 안내
-- **예상 소요 시간**: 2일 ~ 3일 (참고용)
-  - *작업 소요 시간을 본 README 하단에 기록해 주시고, 시간이 많이 소요된 부분도 함께 정리해 주시면 좋겠습니다.*
-- **제출 방식**: `tech@hanaloop.com`으로 제출 (GitHub 링크 등 첨부)
-- **발표**: 과제 합격자에 한해 20분간 발표가 진행됩니다.
-
-### 📝 제출 형태 (필수 포함 사항)
-1. **Public GitHub 저장소 링크** (코드 커밋 히스토리 포함 필수)
-   - *코드 작성 과정을 확인할 수 있도록 작업 단계별로 커밋을 남겨 주세요.*
-2. **UI 실행 비디오 캡쳐 및 스크린샷**
-3. **README 문서** (시스템 설명, 실행 방법, AI 사용 내역 등 포함)
-4. (선택) 배포 링크
-
-### 📊 평가 기준
-| 평가 항목 | 핵심 질문 | 배점 |
-| :--- | :--- | :--- |
-| **시스템 설계** | API 활용 방식, 모듈형 컴포넌트 구조, 그리고 확장성·재사용성·안정성을 고려한 설계 | 30% |
-| **도메인 이해** | 탄소 회계 개념(PCF, GHG Scope)을 코드·설명에 반영했는가? | 25% |
-| **사용자 경험(UX)** | 비전문가도 직관적으로 데이터를 입력하고 결과를 읽을 수 있는가? | 25% |
-| **논리적 설명** | 설계 결정 이유, trade-off, AI 활용 방식을 명확하게 말할 수 있는가? | 20% |
-
----
-
-## ✅ 제출 전 자가 체크리스트 (지원자용)
-
-지원자분들은 과제 제출 전 아래 항목들을 점검해 주시기 바랍니다.
-
-### 필수 항목
-- [ ] PCF 계산 결과가 시각화되어 있으며, 사용자가 직관적으로 이해할 수 있고 의미가 명확하게 전달된다.
-- [ ] 표시되는 데이터 값이 정확하고 단위 등 표시가 적절히 되어 있다.
-- [ ] 데이터 입력 화면에서 오류 입력 시 에러 메시지가 표시된다.
-- [ ] UI 실행 과정을 비디오 캡쳐와 스크린샷으로 안내한다.
-- [ ] README에 로컬 실행 방법이 5단계 이내로 명확하게 작성되어 있다. (`yarn start`로 오류 없이 실행된다.)
-- [ ] README에 AI 도구 사용 내역이 기록되어 있다.
-- [ ] README에 시스템 전체적인 설명과 설계 내용이 포함되어 있다.
-- [ ] GitHub 저장소가 Public이고 커밋 히스토리가 있다.
-
-### 권장 항목
-- [ ] ERD 또는 스키마 다이어그램이 README에 포함되어 있다.
-- [ ] 발표에서 "왜 이렇게 설계했는가" 2개 이상 설명할 수 있다.
-- [ ] 설계 trade-off 1개 이상을 말할 수 있다.
-
-### 보너스 항목
-- [ ] Docker Compose로 즉시 실행 가능하다.
-- [ ] 주어진 Excel의 "과제용 데이터"를 그대로 임포트 할 수 있다.
-- [ ] OpenAPI / Swagger 문서가 있다.
-- [ ] 타 시스템과 비교를 수행했다.
-
----
-
-# ✍️ 지원자 작성 영역
-
-> 아래 내용부터는 지원자분께서 직접 작성해 주시기 바랍니다.
-
-## 1. 프로젝트 실행 방법
-*(5단계 이내로 로컬 실행 방법을 명확하게 작성해 주세요. `yarn start`로 오류 없이 실행되어야 합니다.)*
-
-1. 
-2. 
-3. 
-4. 
-5. 
-
-## 2. UI 실행 화면 (스크린샷 및 비디오)
-*(UI 실행 과정을 보여주는 스크린샷과 비디오 링크를 첨부해 주세요.)*
-
-## 3. 시스템 전체 설명 및 설계 내용
-
-### 3.1 시스템 아키텍처
-
-```text
-┌─────────────────────────────────────────────┐
-│       Frontend (Next.js 14 + React)         │
-│  • 분석 대시보드 (분석가용)                  │
-│  • 데이터 임포트 인터페이스                 │
-│  • 배출계수 관리 UI                         │
-│  • 필터링 & 드릴다운 기능                   │
-├─────────────────────────────────────────────┤
-│   API Layer (Next.js Route Handlers)        │
-│  • /api/dashboard/* (분석 데이터 조회)      │
-│  • /api/import/* (Excel 임포트)             │
-│  • /api/coefficients/* (배출계수 관리)      │
-├─────────────────────────────────────────────┤
-│      Backend & Data Layer                   │
-│  • PostgreSQL (데이터 저장소)               │
-│  • Business Logic (PCF 계산 엔진)           │
-│  • Excel Parser (파일 검증 및 임포트)       │
-└─────────────────────────────────────────────┘
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-### 3.2 대시보드 설계 (분석형)
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-**UI 구조**: 좌측 사이드바 네비게이션 + 메인 분석 영역
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-**좌측 사이드바** (4개 섹션):
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-- 📊 분석 대시보드 (메인, 필터 + 지표 + 차트)
-- 📥 데이터 임포트 (Excel 파일 업로드)
-- ⚙️ 배출계수 관리 (계수 조회 + 버전 이력)
-- 👤 설정 (사용자 설정)
+## Learn More
 
-**메인 분석 영역**:
+To learn more about Next.js, take a look at the following resources:
 
-1. **필터바** (상단): 제품, 기간, Scope(1,2,3), 공급망 단계 - 모두 조합 가능
-2. **핵심 지표** (카드 3개): 총 배출량, 감축율, 배출범위 분류
-3. **차트 영역** (2×2 그리드):
-   - 제품별 PCF (막대 차트)
-   - 시간 추이 (선 차트)
-   - Scope 비율 (도넛 차트)
-   - 공급망 단계별 기여도 (트리맵)
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-### 3.3 핵심 기능
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-#### A) 분석 대시보드
+## Deploy on Vercel
 
-- 다층 필터링 (제품 × 기간 × Scope × 공급망 단계)
-- 병렬 KPI 카드 표시
-- 4가지 차트로 다각도 분석
-- 차트 상호작용 (호버, 클릭, 드릴다운)
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-#### B) Excel 임포트 (간단한 4단계)
-
-- 파일 선택 → 검증 → 미리보기 → 저장
-- 필수 열 자동 검증
-- 배출계수 코드 확인
-- 명확한 에러 메시지
-
-#### C) 배출계수 관리
-
-- 배출계수 테이블 조회
-- 버전 이력 추적
-- 적용 기간 관리
-
-### 3.4 데이터 모델
-
-**핵심 엔티티**:
-
-- Products: 제품 정보
-- EmissionFactors: 배출계수 (버전 관리)
-- PCFData: PCF 계산 결과 (제품별, 배출범위별, 공급망 단계별)
-- ImportLogs: 임포트 이력
-
-**관계**:
-
-```text
-Products (1) ←→ (N) PCFData
-EmissionFactors (1) ←→ (N) PCFData
-```
-
-### 3.5 PCF 계산 로직
-
-```text
-PCF = (Raw Materials × EF_RM) 
-    + (Electricity × EF_EL) 
-    + (Transportation × EF_TR)
-
-Scope 분류:
-- Scope 1: 직접 배출 (생산 과정)
-- Scope 2: 간접 배출 (구매 전기)
-- Scope 3: 기타 간접 배출 (운송, 폐기 등)
-```
-
-### 3.6 기술 스택
-
-| 계층 | 기술 |
-| --- | --- |
-| **Frontend** | Next.js 14, React 18, TypeScript |
-| **Styling** | Tailwind CSS |
-| **차트** | Recharts |
-| **상태 관리** | React Query |
-| **API** | Next.js Route Handlers |
-| **Database** | PostgreSQL 14+ |
-| **ORM** | Prisma |
-| **파일 처리** | ExcelJS |
-
-**상세 설계 문서**: [docs/superpowers/specs/2026-05-05-dashboard-design.md](docs/superpowers/specs/2026-05-05-dashboard-design.md)
-
-## 4. AI 도구 사용 내역
-*(어떤 도구를 사용했고, 어떤 프롬프트를 사용했으며, 왜 그렇게 결정했는지 구체적으로 작성해 주세요.)*
-
-| 사용한 도구 | 활용 내용 / Prompt | 선택 이유 / 결과 반영 |
-| --- | --- | --- |
-| | | |
-
-## 5. 작업 소요 시간 및 회고
-* **총 작업 소요 시간**: 
-* **시간이 많이 소요된 부분과 이유**: 
-
-## 6. (선택) ERD 또는 스키마 다이어그램, 타 시스템 비교 등
-*(자유롭게 작성해 주세요.)*
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

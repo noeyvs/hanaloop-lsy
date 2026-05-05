@@ -1,0 +1,93 @@
+<h2>대시보드 레이아웃 선택</h2>
+<p class="subtitle">사용자 역할과 정보 구조를 고려한 레이아웃 옵션</p>
+
+<div class="cards">
+  <div class="card" data-choice="analyst" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="mockup">
+        <div style="background: #f5f5f5; padding: 16px; border-radius: 4px; margin-bottom: 16px;">
+          <div style="font-size: 12px; color: #666; margin-bottom: 8px;">핵심 지표</div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div style="background: white; padding: 12px; border-radius: 4px; text-align: center;">
+              <div style="font-size: 24px; font-weight: bold;">2,450</div>
+              <div style="font-size: 11px; color: #666;">총 배출량 (tCO₂e)</div>
+            </div>
+            <div style="background: white; padding: 12px; border-radius: 4px; text-align: center;">
+              <div style="font-size: 24px; font-weight: bold;">↓12%</div>
+              <div style="font-size: 11px; color: #666;">월별 감축율</div>
+            </div>
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div style="background: white; border: 1px solid #eee; padding: 12px; border-radius: 4px; min-height: 120px;">차트</div>
+          <div style="background: white; border: 1px solid #eee; padding: 12px; border-radius: 4px; min-height: 120px;">차트</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>분석형 대시보드</h3>
+      <p><strong>사용자:</strong> 데이터 분석가, 지속가능성 담당자</p>
+      <p><strong>특징:</strong> 여러 차트, 상세 데이터, 필터링 기능 강화</p>
+      <p><strong>장점:</strong> 깊이 있는 분석 가능, 다양한 관점</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="executive" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="mockup">
+        <div style="background: white; padding: 16px; border-radius: 4px; margin-bottom: 16px; border: 1px solid #eee;">
+          <div style="font-size: 14px; font-weight: bold; margin-bottom: 12px;">탄소 배출 요약</div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px;">
+            <div style="text-align: center; padding: 12px;">
+              <div style="font-size: 28px; font-weight: bold; color: #d32f2f;">2,450</div>
+              <div style="font-size: 12px; color: #666;">총 배출량</div>
+            </div>
+            <div style="text-align: center; padding: 12px;">
+              <div style="font-size: 28px; font-weight: bold; color: #388e3c;">↓12%</div>
+              <div style="font-size: 12px; color: #666;">감축율</div>
+            </div>
+            <div style="text-align: center; padding: 12px;">
+              <div style="font-size: 28px; font-weight: bold;">Scope 1,2,3</div>
+              <div style="font-size: 12px; color: #666;">배출 범위</div>
+            </div>
+          </div>
+        </div>
+        <div style="background: white; border: 1px solid #eee; padding: 16px; border-radius: 4px; min-height: 150px; text-align: center;">큰 차트</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>경영자형 대시보드</h3>
+      <p><strong>사용자:</strong> CEO, 임원진, 관리자</p>
+      <p><strong>특징:</strong> 핵심 KPI 중심, 최소한의 정보</p>
+      <p><strong>장점:</strong> 한눈에 파악, 빠른 의사결정</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="hybrid" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="mockup">
+        <div style="background: #f5f5f5; padding: 12px; border-radius: 4px; margin-bottom: 12px; display: flex; gap: 8px;">
+          <div style="background: #1976d2; color: white; padding: 6px 12px; border-radius: 4px; font-size: 12px;">개요</div>
+          <div style="background: white; padding: 6px 12px; border-radius: 4px; font-size: 12px; color: #666;">상세분석</div>
+          <div style="background: white; padding: 6px 12px; border-radius: 4px; font-size: 12px; color: #666;">트렌드</div>
+        </div>
+        <div style="background: white; border: 1px solid #eee; padding: 16px; border-radius: 4px; min-height: 180px;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 16px;">
+            <div style="text-align: center;"><div style="font-size: 20px; font-weight: bold;">2,450</div></div>
+            <div style="text-align: center;"><div style="font-size: 20px; font-weight: bold;">↓12%</div></div>
+            <div style="text-align: center;"><div style="font-size: 20px; font-weight: bold;">Scope</div></div>
+          </div>
+          <div style="height: 80px; background: #f9f9f9; border-radius: 4px;"></div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>하이브리드 대시보드</h3>
+      <p><strong>사용자:</strong> 모든 사용자</p>
+      <p><strong>특징:</strong> 탭 기반 다중 뷰, 유연한 전환</p>
+      <p><strong>장점:</strong> 한 곳에서 모든 정보 제공, 사용자 맞춤형</p>
+    </div>
+  </div>
+</div>
+
+<p class="subtitle" style="margin-top: 32px; font-size: 13px; color: #999;">이미지는 개념도입니다. 실제 디자인은 다를 수 있습니다.</p>
