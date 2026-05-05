@@ -107,10 +107,10 @@
 - id, name, description, created_at
 
 **EmissionFactors** (배출계수)
-- id, code, description, value, unit, version, applicable_from, created_at, updated_at
+- id, activityType, item, factor, unit, version, validFrom, validTo, created_at, updated_at
 
-**PCFData** (PCF 계산 데이터)
-- id, product_id, raw_materials(kg), electricity(kWh), transportation(km), scope(1|2|3), stage(원재료|생산|물류|판매), calculated_pcf, calculated_at, source (manual|import)
+**ActivityData** (활동 데이터)
+- id, date, activityType, description, quantity, unit, calculatedPcf, emissionFactorId, created_at, updated_at
 
 **ImportLogs** (임포트 이력)
 - id, file_name, row_count, status(success|failed), error_message, imported_at
