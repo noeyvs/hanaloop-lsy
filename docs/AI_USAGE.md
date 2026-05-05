@@ -19,6 +19,7 @@
 | 2026-05-05 | Gemini 3.1 Pro (Antigravity) | **DB 스키마 설계 및 배출계수 버전 관리:**<br/>_"Prisma를 기반으로 Excel 컬럼과 배출계수 버전 관리를 고려한 스키마 설계"_ | - **이유:** 배출계수 버전 이력을 추적하라는 요구사항을 충족하고, Excel 데이터(`일자`, `활동 유형`, `량` 등)를 효율적으로 저장하기 위함.<br/>- **결과:** `EmissionFactor`(버전/유효기간 포함) 및 `ActivityData` 테이블 설계 완료. (SCD Type 2 방식 적용) |
 | 2026-05-05 | Gemini 3.1 Pro (Antigravity) | **환경 변수 설정 (.env):**<br/>_"Prisma 연동을 위한 DATABASE_URL 환경 변수 설정"_ | - **이유:** Prisma Migrate 실행 시 필요한 DB 연결 정보를 제공하기 위함.<br/>- **결과:** `.env` 및 `.env.example` 파일 생성 완료. |
 | 2026-05-05 | Claude Code (Haiku 4.5)<br/>+ figma:figma-generate-diagram | **ERD 다이어그램 생성:**<br/>_"현재 Prisma schema 기준으로 ERD 또는 스키마 다이어그램 이미지로 줘. figma 등 다양한 mcp를 사용해도 좋아"_ | - **이유:** README의 권장 항목에 "ERD 또는 스키마 다이어그램"이 포함되어 있고, 시스템 설계를 시각적으로 명확히 표현하여 평가 기준 중 "시스템 설계"(30%) 항목 강화.<br/>- **결과:** Figma + Mermaid.js (erDiagram)를 활용하여 EmissionFactorMaster → EmissionFactorVersion → ActivityData의 관계와 Product 엔티티를 시각화한 ERD 생성. 다이어그램 링크를 README.md 6번 섹션에 추가하고 설계 특징(버전 관리, 유연한 참조, 인덱싱) 설명 추가. |
+| 2026-05-05 | Claude Code (Haiku 4.5) | **Docker 및 PostgreSQL 개발 환경 구성:**<br/>_"PostgreSQL 지금 이거 쓰는 거 마자? Docker로 진행해"_ | - **이유:** 로컬 개발 환경에서 PostgreSQL을 쉽게 관리하고, 팀원들과 동일한 데이터베이스 환경을 보장하기 위함.<br/>- **결과:** Docker Compose로 PostgreSQL 15 컨테이너 구성, 환경변수 관리 (.env, .env.example), Prisma migration 완료. 자동화 스크립트 (scripts/docker-setup.sh, docker-down.sh) 생성으로 개발자 경험 개선. |
 
 ## 💡 AI 활용 종합 회고
 

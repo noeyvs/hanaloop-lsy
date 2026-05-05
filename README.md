@@ -85,13 +85,68 @@
 
 ## 1. 프로젝트 실행 방법
 
-*(5단계 이내로 로컬 실행 방법을 명확하게 작성해 주세요. `yarn start`로 오류 없이 실행되어야 합니다.)*
+### 빠른 시작 (Docker Compose + PostgreSQL)
 
-1.
-2.
-3.
-4.
-5.
+1. **저장소 클론**
+
+   ```bash
+   git clone https://github.com/noeyvs/hanaloop-lsy.git
+   cd hanaloop-lsy
+   ```
+
+2. **PostgreSQL Docker 컨테이너 시작**
+
+   ```bash
+   docker-compose up -d
+   ```
+
+   또는 자동화 스크립트 사용:
+
+   ```bash
+   chmod +x scripts/docker-setup.sh
+   ./scripts/docker-setup.sh
+   ```
+
+3. **환경변수 설정**
+
+   ```bash
+   # .env 파일이 없으면 생성 (또는 .env.example 복사)
+   cp .env.example .env
+   ```
+
+4. **의존성 설치 및 데이터베이스 마이그레이션**
+
+   ```bash
+   yarn install
+   npx prisma migrate dev
+   ```
+
+5. **개발 서버 시작**
+
+   ```bash
+   yarn dev
+   ```
+
+   브라우저에서 `http://localhost:3000` 접속
+
+### 주요 명령어
+
+```bash
+# PostgreSQL 시작
+docker-compose up -d
+
+# PostgreSQL 중지
+docker-compose down
+
+# 데이터베이스 상태 확인
+docker-compose ps
+
+# PostgreSQL 접속
+docker exec -it hanaloop-db psql -U hanaloop_user -d hanaloop
+
+# Prisma Studio (데이터 시각화)
+npx prisma studio
+```
 
 ## 2. UI 실행 화면 (스크린샷 및 비디오)
 
@@ -111,7 +166,8 @@
 
 ## 5. 작업 소요 시간 및 회고
 
-* **총 작업 소요 시간**:
+- **총 작업 소요 시간**:
+
 - **시간이 많이 소요된 부분과 이유**:
 
 ## 6. (선택) ERD 또는 스키마 다이어그램, 타 시스템 비교 등
